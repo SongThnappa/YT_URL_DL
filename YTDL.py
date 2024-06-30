@@ -1,12 +1,12 @@
 import os
-import requests
 import json
+import requests
 from googleapiclient.discovery import build
 
 def load_api_key():
     with open('config.json', 'r') as config_file:
         config = json.load(config_file)
-        return config['youtube_api_key']
+        return config['youtube_api_key'], config['youtube_channel_id']
 
 # Function to get the "Uploads" playlist ID from a channel
 def get_uploads_playlist_id(api_key, channel_id):
@@ -46,8 +46,8 @@ def get_video_urls_from_playlist(api_key, playlist_id):
 
 # Main function to run the script
 def main():
-    api_key = load_api_key()  # Load the API key from config file
-    channel_id = "YOUR_CHANNEL_ID"  # Replace with your YouTube channel ID
+    api_key, channel_id = load_api_key()  # Load the API key from config file
+   
     
     # Get the "Uploads" playlist ID
     uploads_playlist_id = get_uploads_playlist_id(api_key, channel_id)
